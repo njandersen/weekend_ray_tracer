@@ -1,0 +1,27 @@
+# Build output
+/build/
+/bin/
+*.exe
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.obj
+*.o
+*.dSYM/
+
+# Ray tracer output (these get big fast)
+*.ppm
+*.png
+
+# Profiling traces
+*.trace
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
