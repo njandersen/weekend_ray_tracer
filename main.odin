@@ -50,12 +50,25 @@ main :: proc() {
 	fmt.eprintf("\r\x1b[2KDone. \n")
 }
 
+hit_sphere :: proc(center: Point3, radius: f64, ray: Ray) -> bool {
+
+	oc: Vec3 = center - ray.origin
+	a := dot(ray.direction, ray.direction)
+	b := -2.0 * dot(ray.direction, oc)
+	c := dot(oc, oc) - radius * radius
+	discriminant := b * b - 4 * a * c
+	return discriminant >= 0
+}
+
 
 ray_at :: proc(ray: Ray, t: f64) -> Point3 {
 	return ray.origin + (t * ray.direction)
 }
 
 ray_color :: proc(ray: Ray) -> Color {
+	if (hit_sphere(Point3{0, 0, -1}, 0.5, ray)) {
+		return Color{1, 0, 0}
+	}
 	unit_direction := unit_vector(ray.direction)
 	a := 0.5 * (unit_direction.y + 1.0)
 	return (1.0 - a) * Color{1.0, 1.0, 1.0} + a * Color{0.5, 0.7, 1.0}
